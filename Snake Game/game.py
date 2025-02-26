@@ -111,6 +111,23 @@ def game_intro():
                 pygame.quit()
                 sys.exit()
 
+                
+def place_food():
+    global foodx, foody
+    food_placed = False
+    while not food_placed:
+        foodx = round(random.randrange(0, dis_width - snake_block) / snake_block) * snake_block
+        foody = round(random.randrange(0, dis_height - snake_block) / snake_block) * snake_block
+        food_rect = pygame.Rect(foodx, foody, snake_block, snake_block)
+        food_placed = True
+        for ob in obstacles:
+            if ob.colliderect(food_rect):
+                food_placed = False
+                break
+
+
+place_food()                
+
 
 def gameLoop():
     global last_update_time
